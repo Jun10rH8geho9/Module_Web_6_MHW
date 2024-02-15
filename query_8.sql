@@ -1,7 +1,8 @@
 -- Знайти середній бал, який ставить певний викладач зі своїх предметів.
 
-SELECT t.name AS teacher_name, AVG(g.grade) AS average_grade
-FROM teachers t
-JOIN subjects sub ON t.id = sub.teacher_id
-JOIN grades g ON sub.id = g.subject_id
-GROUP BY t.id;
+SELECT teachers.name AS teacher_name, AVG(grades.grade) AS average_grade
+FROM grades
+JOIN subjects ON grades.subject_id = subjects.id
+JOIN teachers ON subjects.teacher_id = teachers.id
+WHERE teachers.id = 1
+GROUP BY teachers.name;

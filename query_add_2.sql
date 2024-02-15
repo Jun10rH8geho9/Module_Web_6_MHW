@@ -1,10 +1,9 @@
 -- Отримати оцінки студентів у вказаній групі з певного предмета на останньому занятті
 
-SELECT s.name AS student_name, g.grade
-FROM students s
-JOIN groups gr ON s.group_id = gr.id
-JOIN subjects sub ON gr.id = sub.group_id
-JOIN grades g ON s.id = g.student_id AND sub.id = g.subject_id
-WHERE gr.number = 2 AND sub.name = 'Public affairs consultant'
-ORDER BY g.date DESC
-LIMIT 1;
+SELECT students.name AS student_name, grades.grade, grades.date
+FROM grades
+JOIN subjects ON grades.subject_id = subjects.id
+JOIN students ON grades.student_id = students.id
+JOIN groups ON subjects.group_id = groups.id
+WHERE subjects.name = 'Further education lecturer' AND groups.number = 1
+AND grades.date = (SELECT MAX(date) FROM grades WHERE subject_id = subjects.id);

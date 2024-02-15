@@ -1,8 +1,8 @@
 --Список курсів, які певному студенту читає певний викладач.
 
-SELECT sub.name AS subject_name
-FROM subjects sub
-JOIN grades g ON sub.id = g.subject_id
-JOIN students s ON g.student_id = s.id
-JOIN teachers t ON sub.teacher_id = t.id
-WHERE s.name = 'Kevin Garcia' AND t.name = 'Stacey Williams';
+SELECT subjects.name, students.name AS student_name, teachers.name AS teacher_name
+FROM subjects
+JOIN grades ON subjects.id = grades.subject_id
+JOIN students ON grades.student_id = students.id
+JOIN teachers ON subjects.teacher_id = teachers.id
+WHERE students.id = 3 AND teachers.id = 3

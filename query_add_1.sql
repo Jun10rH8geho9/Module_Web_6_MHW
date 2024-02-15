@@ -1,8 +1,9 @@
 --Середній бал, який певний викладач ставить певному студентові.
 
-SELECT AVG(g.grade) AS average_grade
-FROM grades g
-JOIN subjects sub ON g.subject_id = sub.id
-JOIN teachers t ON sub.teacher_id = t.id
-JOIN students s ON g.student_id = s.id
-WHERE t.name = 'Michele Evans' AND s.name = 'Kathleen Clark';
+SELECT teachers.name AS teacher_name, students.name AS student_name, AVG(grades.grade) AS average_grade
+FROM grades
+JOIN subjects ON grades.subject_id = subjects.id
+JOIN teachers ON subjects.teacher_id = teachers.id
+JOIN students ON grades.student_id = students.id
+WHERE teachers.id = 3 AND students.id = 3
+GROUP BY teachers.name, students.name;

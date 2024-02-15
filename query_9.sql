@@ -1,7 +1,7 @@
 --Знайти список курсів, які відвідує студент.
 
-SELECT DISTINCT sub.name AS subject_name
-FROM subjects sub
-JOIN grades g ON sub.id = g.subject_id
-JOIN students s ON g.student_id = s.id
-WHERE s.name = 'John Johnson';
+SELECT subjects.name, students.name AS student_name
+FROM subjects
+JOIN grades ON subjects.id = grades.subject_id
+JOIN students ON grades.student_id = students.id
+WHERE students.id = 3;
